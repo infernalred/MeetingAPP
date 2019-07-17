@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace MeetingAPI.Data
 {
-    interface IAuthRepository
+    public interface IAuthRepository
     {
         Task<User> Login(string username, string password);
+        Task<bool> UserExists(string username);
     }
 }
