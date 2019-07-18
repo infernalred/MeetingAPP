@@ -26,7 +26,7 @@ namespace MeetingAPI.Controllers
             _config = config;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLogin userForLogin)
         {
             var userFromRepository = await _repository.Login(userForLogin.Login, userForLogin.Password);

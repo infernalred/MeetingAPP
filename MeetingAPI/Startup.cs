@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace MeetingAPI
 {
@@ -32,12 +35,6 @@ namespace MeetingAPI
             services.AddControllers();
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddCors();
-            
-            //services.AddTransient<IAuthRepository>(provider =>
-            //{
-            //    if (Configuration.GetConnectionString("TypeAuth") == "Domain") return new AuthRepositoryAD();
-            //    else return new AuthRepositoryAD();
-            //});
             if (dbString == "DB")
             {
                 services.AddScoped<IAuthRepository, AuthRepositoryDB>();
@@ -46,6 +43,17 @@ namespace MeetingAPI
             {
                 services.AddScoped<IAuthRepository, AuthRepositoryAD>();
             }
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("Setting:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +64,7 @@ namespace MeetingAPI
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseAuthentication();
             app.UseMvc();
 
             //app.UseRouting();
