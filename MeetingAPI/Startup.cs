@@ -30,11 +30,12 @@ namespace MeetingAPI
         public void ConfigureServices(IServiceCollection services)
         {
             string dbString = Configuration.GetConnectionString("SQLExpress");
-            string typeAuth = Configuration.GetSection("Setting:TypeAuth").Value;
+            string typeAuth = Configuration.GetSection("Settings:TypeAuth").Value;
             services.AddDbContext<DataContext>(options => options.UseSqlServer(dbString));
             services.AddControllers();
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddCors();
+            services.AddScoped<IAuthRepository, AuthRepositoryDB>();
             if (dbString == "DB")
             {
                 services.AddScoped<IAuthRepository, AuthRepositoryDB>();
@@ -49,7 +50,7 @@ namespace MeetingAPI
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("Setting:Token").Value)),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("Settings:Token").Value)),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };

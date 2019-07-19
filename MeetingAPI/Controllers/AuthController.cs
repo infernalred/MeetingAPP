@@ -36,7 +36,8 @@ namespace MeetingAPI.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepository.Login),
-                new Claim(ClaimTypes.Email, userFromRepository.Password),
+                new Claim(ClaimTypes.Name, userFromRepository.Login),
+                new Claim(ClaimTypes.Email, userFromRepository.Email),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("Settings:Token").Value));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
