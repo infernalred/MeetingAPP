@@ -22,15 +22,19 @@
     "@angular/platform-browser-dynamic": "7.2.5",
     "@angular/platform-server": "7.2.5",
     "@angular/router": "7.2.5",
+    "@fullcalendar/angular": "^4.2.1",
+    "@fullcalendar/core": "^4.2.0",
+    "@fullcalendar/daygrid": "^4.2.0",
+    "@fullcalendar/resource-timegrid": "^4.2.0",
     "@nguniversal/module-map-ngfactory-loader": "7.1.0",
-    "core-js": "^2.6.5",
-    "rxjs": "^6.4.0",
-    "zone.js": "^0.8.29",
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^4.3.1",
-    "jquery": "3.3.1",
+    "core-js": "^2.6.5",
+    "jquery": "^3.4.1",
     "oidc-client": "^1.6.1",
-    "popper.js": "^1.14.3"
+    "popper.js": "^1.14.3",
+    "rxjs": "^6.4.0",
+    "zone.js": "^0.8.29"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.5",
@@ -54,6 +58,6 @@
     "node-sass": "^4.9.3",
     "protractor": "~5.4.0",
     "ts-node": "~5.0.1",
-    "tslint": "~5.9.1"
+    "tslint": "^5.9.1"
   }
 }

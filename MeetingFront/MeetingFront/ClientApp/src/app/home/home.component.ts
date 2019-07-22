@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Calendar } from '@fullcalendar/core';
-import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
-export class HomeComponent  {
-  calendarPlugins = [resourceTimeGridPlugin];
+export class HomeComponent {
 }
-

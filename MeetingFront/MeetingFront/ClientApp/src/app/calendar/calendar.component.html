@@ -1,0 +1,16 @@
+<div class='app'>
+<div class='app-calendar'>
+  <full-calendar
+  #calendar
+  schedulerLicenseKey="GPL-My-Project-Is-Open-Source"
+  defaultView="resourceTimeGridDay"
+  [header]="{
+    left: 'prev,next',
+    center: 'title',
+    right: 'resourceTimeGridDay,resourceTimeGridFourDay'
+  }"
+  [datesAboveResources]="true"
+  [plugins]="calendarPlugins"
+  ></full-calendar>
+</div>
+</div>
