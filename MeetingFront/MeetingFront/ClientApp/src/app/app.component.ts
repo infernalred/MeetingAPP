@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
 
 @Component({
   selector: 'app-root',

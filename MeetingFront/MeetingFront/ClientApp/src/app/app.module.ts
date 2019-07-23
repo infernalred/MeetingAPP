@@ -9,6 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AuthService } from './_services/auth.service';
 import { CalendarComponent } from './calendar/calendar.component';
+import { SchedulerServiceService } from './_services/schedulerService.service';
 
 @NgModule({
    declarations: [
@@ -27,7 +28,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     ])
   ],
   providers: [
-    AuthService
+    AuthService,
+    SchedulerServiceService
   ],
   bootstrap: [AppComponent]
 })

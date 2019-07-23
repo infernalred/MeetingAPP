@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
-import { ResourceInput } from '@fullcalendar/resource-common/structs/resource';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { SchedulerServiceService } from '../_services/schedulerService.service';
+import { Resource } from '@fullcalendar/resource-common';
 
 @Component({
   selector: 'app-calendar',
@@ -10,27 +9,21 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  roomUrl = 'http://localhost:5555/api/values/allrooms'
+  
 
-  rooms: any;
+  rooms: any[]=[];
   calendarVisible = true;
   calendarPlugins = [resourceTimeGridPlugin];
   calendarResources = [this.rooms];
 
-  constructor(private http: HttpClient) { }
+  constructor(private schedulerService: SchedulerServiceService) { }
 
-  calendarResource = [];
   ngOnInit() {
+    this.schedulerService.loadroom().subscribe(response => {
+      this.rooms=response;
+      console.log(this.rooms);
+    });
+    
   }
-loadroom(){
-  return this.http.get(this.roomUrl)
-  .pipe(
-    map((response: any) => {
-      const rooms = response;
-      if (rooms) {
-        this.calendarResources = rooms;
-      }
-    })
-  );
-}
+
 }
