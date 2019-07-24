@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Calendar } from '@fullcalendar/core';
 import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
 import { SchedulerServiceService } from '../_services/schedulerService.service';
-import { Resource } from '@fullcalendar/resource-common';
 
 @Component({
   selector: 'app-calendar',
@@ -22,7 +22,6 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     this.schedulerService.loadroom().subscribe(response => {
       this.rooms=response;
-      console.log(this.rooms);
     });
 
     this.schedulerService.loadevent().subscribe(response => {

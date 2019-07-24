@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthService } from './_services/auth.service';
 import { CalendarComponent } from './calendar/calendar.component';
 import { SchedulerServiceService } from './_services/schedulerService.service';
+import { AlertifyService } from './_services/alertify.service';
 
 @NgModule({
    declarations: [
@@ -29,7 +30,8 @@ import { SchedulerServiceService } from './_services/schedulerService.service';
   ],
   providers: [
     AuthService,
-    SchedulerServiceService
+    SchedulerServiceService,
+    AlertifyService
   ],
   bootstrap: [AppComponent]
 })

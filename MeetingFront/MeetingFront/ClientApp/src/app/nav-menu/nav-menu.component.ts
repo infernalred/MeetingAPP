@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { tokenKey } from '@angular/core/src/view';
 import { NgModule } from '@angular/core';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -11,26 +12,25 @@ import { NgModule } from '@angular/core';
 export class NavMenuComponent implements OnInit {
   model: any = {};
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
 
   login() {
     this.authService.login(this.model).subscribe(next => {
-      console.log('Logged in successfully');
+      this.alertify.success('Logged in successfully');
     }, error => {
-      console.log('Failed to login');
+      this.alertify.error('Failed to login');
     });
   }
 
   loggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
+    return this.authService.loggedIn();
   }
 
   logout() {
     localStorage.removeItem('token');
-    console.log('logged out');
+    this.alertify.message('logged out');
   }
 }

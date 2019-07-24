@@ -21,7 +21,7 @@ namespace MeetingAPI.Data
             if (user == null)
                 return null;
 
-            if (!CheckPassword(password))
+            if (!(password == user.Password))
                 return null;
 
             return user;
