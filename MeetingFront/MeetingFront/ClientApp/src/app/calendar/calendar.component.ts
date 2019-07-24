@@ -12,6 +12,7 @@ export class CalendarComponent implements OnInit {
   
 
   rooms: any[]=[];
+  events: any[]=[];
   calendarVisible = true;
   calendarPlugins = [resourceTimeGridPlugin];
   calendarResources = [this.rooms];
@@ -22,6 +23,10 @@ export class CalendarComponent implements OnInit {
     this.schedulerService.loadroom().subscribe(response => {
       this.rooms=response;
       console.log(this.rooms);
+    });
+
+    this.schedulerService.loadevent().subscribe(response => {
+      this.events=response;
     });
     
   }
