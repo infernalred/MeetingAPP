@@ -11,27 +11,34 @@ import { AuthService } from './_services/auth.service';
 import { CalendarComponent } from './calendar/calendar.component';
 import { SchedulerServiceService } from './_services/schedulerService.service';
 import { AlertifyService } from './_services/alertify.service';
+import { CreateComponent } from './create/create.component';
+import { DetailsComponent } from './details/details.component';
+import { AdminComponent } from './admin/admin.component';
+import { appRoutes } from './routes';
+import { AuthGuard } from './_guards/auth.guard';
 
 @NgModule({
    declarations: [
       AppComponent,
       NavMenuComponent,
       HomeComponent,
-      CalendarComponent
+      CalendarComponent,
+      CreateComponent,
+      DetailsComponent,
+      AdminComponent
    ],
    imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
     HttpClientModule,
     FormsModule,
     FullCalendarModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-    ])
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     AuthService,
     SchedulerServiceService,
-    AlertifyService
+    AlertifyService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
