@@ -16,6 +16,7 @@ export class CalendarComponent implements OnInit {
   calendarVisible = true;
   calendarPlugins = [resourceTimeGridPlugin];
   calendarResources = [this.rooms];
+  calendarEvents = [this.events];
 
   constructor(private schedulerService: SchedulerServiceService) { }
 

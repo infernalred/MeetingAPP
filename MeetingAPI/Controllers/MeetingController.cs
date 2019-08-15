@@ -25,7 +25,8 @@ namespace MeetingAPI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("getmeetings")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetMeetings()
         {
             var meetings = await _repo.GetMeetings();
