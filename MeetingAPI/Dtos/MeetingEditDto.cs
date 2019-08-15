@@ -1,25 +1,22 @@
-﻿using System;
+﻿using MeetingAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MeetingAPI.Models
+namespace MeetingAPI.Dtos
 {
-    public class Meeting
+    public class MeetingEditDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public DateTime Date { get; set; }
+        public TimeSpan TimeStart { get; set; }
+        public TimeSpan TimeEnd { get; set; }
         public Room Room { get; set; }
         public int RoomId { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
-        public List<MeetingsAttenders> MeetingsAttenders { get; set; }
-
-        public Meeting()
-        {
-            MeetingsAttenders = new List<MeetingsAttenders>();
-        }
+        public string[] MeetingsAttenders { get; set; }
     }
 }

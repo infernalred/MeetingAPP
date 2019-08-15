@@ -14,6 +14,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using MeetingAPI.Helpers;
+using AutoMapper;
 
 namespace MeetingAPI
 {
@@ -33,9 +38,11 @@ namespace MeetingAPI
             string typeAuth = Configuration.GetSection("Settings:TypeAuth").Value;
             services.AddDbContext<DataContext>(options => options.UseSqlServer(dbString));
             services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddCors();
             services.AddScoped<IAuthRepository, AuthRepositoryDB>();
+            services.AddScoped<IMeetingRepository, MeetingRepository>();
             if (dbString == "DB")
             {
                 services.AddScoped<IAuthRepository, AuthRepositoryDB>();
@@ -63,6 +70,22 @@ namespace MeetingAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if (error != null)
+                        {
+                            context.Response.AddApplicaionError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
+                });
             }
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();

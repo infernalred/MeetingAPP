@@ -16,6 +16,8 @@ import { DetailsComponent } from './details/details.component';
 import { AdminComponent } from './admin/admin.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
    declarations: [
@@ -32,10 +34,12 @@ import { AuthGuard } from './_guards/auth.guard';
     HttpClientModule,
     FormsModule,
     FullCalendarModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BsDropdownModule.forRoot()
   ],
   providers: [
     AuthService,
+    ErrorInterceptorProvider,
     SchedulerServiceService,
     AlertifyService,
     AuthGuard
