@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { SchedulerServiceService } from './schedulerService.service';
+import { SchedulerService } from './scheduler.service';
 
 describe('Service: SchedulerService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SchedulerServiceService]
+      providers: [SchedulerService]
     });
   });
 
-  it('should ...', inject([SchedulerServiceService], (service: SchedulerServiceService) => {
+  it('should ...', inject([SchedulerService], (service: SchedulerService) => {
     expect(service).toBeTruthy();
   }));
 });

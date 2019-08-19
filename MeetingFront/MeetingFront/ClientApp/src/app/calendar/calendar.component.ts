@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Calendar } from '@fullcalendar/core';
 import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
-import { SchedulerServiceService } from '../_services/schedulerService.service';
+import { SchedulerService } from '../_services/scheduler.service';
+import { Room } from '../_models/room';
 
 @Component({
   selector: 'app-calendar',
@@ -11,21 +12,21 @@ import { SchedulerServiceService } from '../_services/schedulerService.service';
 export class CalendarComponent implements OnInit {
   
 
-  rooms: any[]=[];
+  rooms: Room[]=[];
   events: any[]=[];
   calendarVisible = true;
   calendarPlugins = [resourceTimeGridPlugin];
   calendarResources = [this.rooms];
   calendarEvents = [this.events];
 
-  constructor(private schedulerService: SchedulerServiceService) { }
+  constructor(private scheduler: SchedulerService) { }
 
   ngOnInit() {
-    this.schedulerService.loadroom().subscribe(response => {
+    this.scheduler.getRooms().subscribe(response => {
       this.rooms=response;
     });
 
-    this.schedulerService.loadevent().subscribe(response => {
+    this.scheduler.getMeetings().subscribe(response => {
       this.events=response;
     });
     

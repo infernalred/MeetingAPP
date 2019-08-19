@@ -17,7 +17,15 @@ namespace MeetingAPI.Helpers
                 {
                     o.MapFrom(s => s.RoomId);
                 });
-            CreateMap<Meeting, MeetingCreateDto>();
+            CreateMap<MeetingCreateDto, Meeting>()
+                .ForMember(d => d.Start, o =>
+                {
+                    o.MapFrom(s => s.Date + s.TimeStart);
+                })
+                .ForMember(d => d.End, o =>
+                {
+                    o.MapFrom(s => s.Date + s.TimeEnd);
+                });
         }
     }
 }

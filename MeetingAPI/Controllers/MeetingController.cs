@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MeetingAPI.Data;
 using MeetingAPI.Dtos;
+using MeetingAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace MeetingAPI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("getmeetings")]
+        [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> GetMeetings()
         {
@@ -40,6 +41,19 @@ namespace MeetingAPI.Controllers
             var meeting = await _repo.GetMeeting(id);
             var meetingToReturn = _mapper.Map<MeetingCalendarDto>(meeting);
             return Ok(meetingToReturn);
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> AddMeeting(MeetingCreateDto meetingCreateDto)
+        {
+            var meetingToCreate = _mapper.Map<Meeting>(meetingCreateDto);
+            _repo.Add(meetingToCreate);
+            if (await _repo.SaveAll())
+            {
+                return RedirectToAction("Index");
+            }
+            throw new Exception($"Creating meeting failed on save");
         }
     }
 }

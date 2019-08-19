@@ -9,7 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AuthService } from './_services/auth.service';
 import { CalendarComponent } from './calendar/calendar.component';
-import { SchedulerServiceService } from './_services/schedulerService.service';
+import { SchedulerService } from './_services/scheduler.service';
 import { AlertifyService } from './_services/alertify.service';
 import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
@@ -17,7 +17,10 @@ import { AdminComponent } from './admin/admin.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
    declarations: [
@@ -35,12 +38,15 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     FormsModule,
     FullCalendarModule,
     RouterModule.forRoot(appRoutes),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot()
   ],
   providers: [
     AuthService,
     ErrorInterceptorProvider,
-    SchedulerServiceService,
+    SchedulerService,
     AlertifyService,
     AuthGuard
   ],
