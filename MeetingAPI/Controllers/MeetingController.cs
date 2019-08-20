@@ -50,9 +50,8 @@ namespace MeetingAPI.Controllers
             var meetingToCreate = _mapper.Map<Meeting>(meetingCreateDto);
             _repo.Add(meetingToCreate);
             if (await _repo.SaveAll())
-            {
-                return RedirectToAction("Index");
-            }
+                NoContent();
+
             throw new Exception($"Creating meeting failed on save");
         }
     }

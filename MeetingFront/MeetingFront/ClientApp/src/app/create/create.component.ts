@@ -3,6 +3,7 @@ import { SchedulerService } from '../_services/scheduler.service';
 import { Meeting } from '../_models/meeting';
 import { AlertifyService } from '../_services/alertify.service';
 import { Router } from '@angular/router';
+import { Room } from '../_models/room';
 
 @Component({
   selector: 'app-create',
@@ -11,10 +12,20 @@ import { Router } from '@angular/router';
 })
 export class CreateComponent implements OnInit {
   model: any = {};
+  rooms: Room[]=[];
 
-  constructor(private schedulerService: SchedulerService, private alertify: AlertifyService, private router: Router) { }
+  constructor(public schedulerService: SchedulerService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
+    this.schedulerService.getRooms().subscribe(response => {
+      this.rooms=response;
+    });
+  }
+
+
+  selectRoomHandler (event: any) {
+    this.model.room = event.target.value.room;
+    this.model.resourceId = event.target.value.resourceId;
   }
 
   createMeeting() {

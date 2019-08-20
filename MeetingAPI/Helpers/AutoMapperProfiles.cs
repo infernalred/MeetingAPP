@@ -20,11 +20,15 @@ namespace MeetingAPI.Helpers
             CreateMap<MeetingCreateDto, Meeting>()
                 .ForMember(d => d.Start, o =>
                 {
-                    o.MapFrom(s => s.Date + s.TimeStart);
+                    o.MapFrom(s => new DateTime(s.Date.Year, s.Date.Month, s.Date.Day, s.TimeStart.Hour, s.TimeStart.Minute, 0));
                 })
                 .ForMember(d => d.End, o =>
                 {
-                    o.MapFrom(s => s.Date + s.TimeEnd);
+                    o.MapFrom(s => new DateTime(s.Date.Year, s.Date.Month, s.Date.Day, s.TimeEnd.Hour, s.TimeEnd.Minute, 0));
+                })
+                .ForMember(d => d.RoomId, o =>
+                {
+                    o.MapFrom(s => s.ResourceId);
                 });
         }
     }

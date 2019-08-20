@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Room } from '../_models/room';
 import { Meeting } from '../_models/meeting';
+import { AuthService } from './auth.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,8 +18,13 @@ const httpOptions = {
 })
 export class SchedulerService {
   baseUrl = environment.apiUrl;
+  username: string;
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient, public authService: AuthService) {
+  this.username = authService.decodedToken.unique_name;
+ }
+
+
 
 getRooms(): Observable<Room[]>{
   return this.http.get<Room[]>(this.baseUrl + 'values/allrooms', httpOptions);

@@ -6,8 +6,8 @@ export interface Meeting {
     id: number;
     title: string;
     date: Date;
-    startTime: Date;
-    endTime: Date;
+    timeStart: Date;
+    timeEnd: Date;
     room: Room;
     user: User;
     resourceId: number;
