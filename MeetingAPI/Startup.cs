@@ -41,6 +41,7 @@ namespace MeetingAPI
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddCors();
+            services.AddScoped<IAttenderRepository, AttenderRepository>();
             services.AddScoped<IAuthRepository, AuthRepositoryDB>();
             services.AddScoped<IMeetingRepository, MeetingRepository>();
             if (dbString == "DB")

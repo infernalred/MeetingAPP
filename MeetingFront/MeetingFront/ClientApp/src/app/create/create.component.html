@@ -1,10 +1,10 @@
 <div class="container mt-2">
   <div class="row justify-content-center">
     <div class="col-6">
-        <form #createForm="ngForm" (ngSubmit)="createMeeting()">
+        <form [formGroup]="createForm" (ngSubmit)="createMeeting()">
 
           <label for="title">Title</label>
-          <input type="text" class="form-control" name="title" placeholder="Enter tittle event" required [(ngModel)]="model.title">
+          <input type="text" class="form-control" formControlName="title" placeholder="Enter tittle event">
 
           <div class="row">
             <div class="col-xs-12 col-12 col-md-5 mt-2 form-group">
@@ -13,8 +13,7 @@
                      class="form-control"
                      #dp="bsDatepicker"
                      [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
-                     name="date"
-                     required [(ngModel)]="model.date"
+                     formControlName="date"
                      bsDatepicker>
             </div>
           </div>
@@ -22,36 +21,34 @@
           <div class="row">
             <div class="col-xs-6 col-6 col-md-3 mr-5">
                 <label for="timeStart">Start time</label>
-                <timepicker name="timeStart" required [(ngModel)]="model.timeStart" [showMeridian]="false"></timepicker>
+                <timepicker formControlName="timeStart"  [showMeridian]="false"></timepicker>
             </div>
               <div class="col-xs-6 col-6 col-md-3">
                   <label for="timeEnd">End time</label>
-                  <timepicker name="timeEnd" required [(ngModel)]="model.timeEnd" [showMeridian]="false"></timepicker>
+                  <timepicker formControlName="timeEnd"  [showMeridian]="false"></timepicker>
               </div>
           </div>
 
           <div class="form-group">
-            <label for="user">User</label>
-            <input type="text" class="form-control"  placeholder={{schedulerService.username}} name="username" required [(ngModel)]="model.username" readonly>
+            <label for="username">User</label>
+            <input type="text" class="form-control" formControlName="username" value={{login}} readonly>
           </div>
 
           <div class="form-group">
-            <label for="roomSelect">Rooms</label>
-            <select class="form-control" name="roomSelect" required [(ngModel)]="model.resourceId" (change)="selectRoomHandler($event)">
-              <option *ngFor="let value of rooms" [value]="rooms">{{value.id + ' ' +  value.title}}</option>
+            <label for="room">Rooms</label>
+            <select class="form-control" formControlName="room">
+              <option  *ngFor="let room of rooms" [ngValue]="room" >{{room.title}}</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="attendersSelect">Attenders</label>
-            <select multiple class="form-control" id="attendersSelect">
-              <option>Pupkin</option>
-              <option>Ivanov</option>
-              <option>Sidorov</option>
+            <label for="attenders">Attenders</label>
+            <select multiple class="form-control" formControlName="attenders">
+              <option *ngFor="let attender of attenders" [ngValue]="attender">{{attender.name}}</option>
             </select>
           </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button [disabled]="!createForm.valid" type="submit" class="btn btn-primary">Submit</button>
           </form>
     </div>
   </div>

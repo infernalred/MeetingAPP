@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Room } from '../_models/room';
 import { Meeting } from '../_models/meeting';
 import { AuthService } from './auth.service';
+import { Attender } from '../_models/attender';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,7 +25,9 @@ constructor(private http: HttpClient, public authService: AuthService) {
   this.username = authService.decodedToken.unique_name;
  }
 
-
+getAttenders(): Observable<Attender[]>{
+  return this.http.get<Attender[]>(this.baseUrl + 'attender', httpOptions);
+}
 
 getRooms(): Observable<Room[]>{
   return this.http.get<Room[]>(this.baseUrl + 'values/allrooms', httpOptions);
