@@ -3,18 +3,25 @@
     <div class="col-6">
         <form [formGroup]="createForm" (ngSubmit)="createMeeting()">
 
+        <div class="form-group">
           <label for="title">Title</label>
-          <input type="text" class="form-control" formControlName="title" placeholder="Enter tittle event">
+          <input type="text"
+          [ngClass]="{'is-invalid': createForm.get('title').errors && createForm.get('title').touched}"
+          class="form-control" formControlName="title" placeholder="Enter tittle event">
+          <div class="invalid-feedback">Please fill the titile</div>
+        </div>
 
           <div class="row">
             <div class="col-xs-12 col-12 col-md-5 mt-2 form-group">
               <label for="date">Date event</label>
               <input type="text"
+              [ngClass]="{'is-invalid': createForm.get('date').errors && createForm.get('date').touched}"
                      class="form-control"
                      #dp="bsDatepicker"
                      [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
                      formControlName="date"
                      bsDatepicker>
+                     <div class="invalid-feedback">Please fill the date</div>
             </div>
           </div>
 
@@ -25,7 +32,10 @@
             </div>
             <div class="col-xs-6 col-6 col-md-3">
                   <label for="timeEnd">End time</label>
-                  <timepicker formControlName="timeEnd"  [showMeridian]="false"></timepicker>
+                  <timepicker 
+                  [ngClass]="{'is-invalid': createForm.get('timeEnd').errors && createForm.get('timeEnd').touched}"
+                  formControlName="timeEnd"  [showMeridian]="false"></timepicker>
+                  <div class="invalid-feedback">Please select room</div>
                 </div>
           </div>
 
@@ -36,16 +46,22 @@
 
           <div class="form-group">
             <label for="room">Rooms</label>
-            <select class="form-control" formControlName="room">
+            <select 
+            [ngClass]="{'is-invalid': createForm.get('room').errors && createForm.get('room').touched}"
+            class="form-control" formControlName="room">
               <option  *ngFor="let room of rooms" [ngValue]="room" >{{room.title}}</option>
             </select>
+            <div class="invalid-feedback">Please select room</div>
           </div>
 
           <div class="form-group">
             <label for="attenders">Attenders</label>
-            <select multiple class="form-control" formControlName="attenders">
+            <select 
+            [ngClass]="{'is-invalid': createForm.get('attenders').errors && createForm.get('attenders').touched}"
+            multiple class="form-control" formControlName="attenders">
               <option *ngFor="let attender of attenders" [ngValue]="attender">{{attender.name}}</option>
             </select>
+            <div class="invalid-feedback">Please choose attenders for meeting</div>
           </div>
 
             <button [disabled]="!createForm.valid" type="submit" class="btn btn-primary">Submit</button>
