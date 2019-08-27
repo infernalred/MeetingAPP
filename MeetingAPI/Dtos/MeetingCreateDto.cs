@@ -8,15 +8,15 @@ namespace MeetingAPI.Dtos
 {
     public class MeetingCreateDto
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public DateTime Date { get; set; }
         public DateTime TimeStart { get; set; }
         public DateTime TimeEnd { get; set; }
-        public Room Room { get; set; }
-        public int ResourceId { get; set; }
-        public User User { get; set; }
-        public int UserId { get; set; }
-        public string[] MeetingsAttenders { get; set; }
+        public int RoomId { get; set; }
+        public string UserId { get; set; }
+        public List<Attender> Attenders { get; set; }
+
 
     }
 }

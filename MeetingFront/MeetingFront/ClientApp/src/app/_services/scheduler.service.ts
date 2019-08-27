@@ -7,6 +7,8 @@ import { Room } from '../_models/room';
 import { Meeting } from '../_models/meeting';
 import { AuthService } from './auth.service';
 import { Attender } from '../_models/attender';
+import { User } from '../_models/user';
+import { UserModel } from '../_models/usermodel';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,10 +21,12 @@ const httpOptions = {
 })
 export class SchedulerService {
   baseUrl = environment.apiUrl;
+  userid: string;
   username: string;
+  useremail: string;
 
 constructor(private http: HttpClient, public authService: AuthService) {
-  this.username = authService.decodedToken.unique_name;
+  
  }
 
 getAttenders(): Observable<Attender[]>{
@@ -39,6 +43,11 @@ getMeetings(): Observable<Meeting[]>{
 
 createMeeting(model: Meeting) {
   return this.http.post(this.baseUrl + 'meeting', model, httpOptions);
+}
+
+getUser() {
+  let userModel = new UserModel(this.authService.decodedToken.nameid, this.authService.decodedToken.unique_name, this.authService.decodedToken.email);
+  return userModel;
 }
 
 }

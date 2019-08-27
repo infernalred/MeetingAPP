@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MeetingAPI.Migrations
 {
-    public partial class AddModels : Migration
+    public partial class createCheme : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,9 +40,8 @@ namespace MeetingAPI.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Login = table.Column<string>(nullable: false),
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: true)
                 },
@@ -60,12 +59,8 @@ namespace MeetingAPI.Migrations
                     Title = table.Column<string>(nullable: true),
                     Start = table.Column<DateTime>(nullable: false),
                     End = table.Column<DateTime>(nullable: false),
-                    ResourceId = table.Column<int>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false),
-                    TimeStart = table.Column<TimeSpan>(nullable: false),
-                    TimeEnd = table.Column<TimeSpan>(nullable: false),
-                    RoomId = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    RoomId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -75,7 +70,7 @@ namespace MeetingAPI.Migrations
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Meetings_Users_UserId",
                         column: x => x.UserId,

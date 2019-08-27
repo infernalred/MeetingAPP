@@ -32,24 +32,21 @@
             </div>
             <div class="col-xs-6 col-6 col-md-3">
                   <label for="timeEnd">End time</label>
-                  <timepicker 
-                  [ngClass]="{'is-invalid': createForm.get('timeEnd').errors && createForm.get('timeEnd').touched}"
-                  formControlName="timeEnd"  [showMeridian]="false"></timepicker>
-                  <div class="invalid-feedback">Please select room</div>
+                  <timepicker formControlName="timeEnd"  [showMeridian]="false"></timepicker>
                 </div>
           </div>
 
-          <div class="form-group">
-            <label for="username">User</label>
-            <input type="text" class="form-control" formControlName="username" value={{login}} readonly>
-          </div>
+          <!-- <div class="form-group">
+            <label for="user">User</label>
+            <input type="text" class="form-control" formControlName="user" value="userModel2" readonly>
+          </div> -->
 
           <div class="form-group">
-            <label for="room">Rooms</label>
+            <label for="roomId">Rooms</label>
             <select 
-            [ngClass]="{'is-invalid': createForm.get('room').errors && createForm.get('room').touched}"
-            class="form-control" formControlName="room">
-              <option  *ngFor="let room of rooms" [ngValue]="room" >{{room.title}}</option>
+            [ngClass]="{'is-invalid': createForm.get('roomId').errors && createForm.get('roomId').touched}"
+            class="form-control" formControlName="roomId">
+              <option  *ngFor="let room of rooms" [ngValue]="room.id" >{{room.title}}</option>
             </select>
             <div class="invalid-feedback">Please select room</div>
           </div>
@@ -59,7 +56,7 @@
             <select 
             [ngClass]="{'is-invalid': createForm.get('attenders').errors && createForm.get('attenders').touched}"
             multiple class="form-control" formControlName="attenders">
-              <option *ngFor="let attender of attenders" [ngValue]="attender">{{attender.name}}</option>
+              <option *ngFor="let attender of attendersChoose" [ngValue]="attender">{{attender.name}}</option>
             </select>
             <div class="invalid-feedback">Please choose attenders for meeting</div>
           </div>

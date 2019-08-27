@@ -8,8 +8,8 @@ export interface Meeting {
     date: Date;
     timeStart: Date;
     timeEnd: Date;
-    room: Room;
-    user: User;
+    roomId: number;
+    userId: string;
     username: string;
     resourceId: number;
     attenders: Attender[];

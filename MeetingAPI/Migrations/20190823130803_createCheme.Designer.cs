@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeetingAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190718141819_AddModels")]
-    partial class AddModels
+    [Migration("20190823130803_createCheme")]
+    partial class createCheme
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0-preview6.19304.10")
+                .HasAnnotation("ProductVersion", "3.0.0-preview8.19405.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -25,13 +25,16 @@ namespace MeetingAPI.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -42,25 +45,23 @@ namespace MeetingAPI.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date");
+                    b.Property<DateTime>("End")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("End");
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ResourceId");
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int?>("RoomId");
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Start");
-
-                    b.Property<TimeSpan>("TimeEnd");
-
-                    b.Property<TimeSpan>("TimeStart");
-
-                    b.Property<string>("Title");
-
-                    b.Property<int?>("UserId");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -73,9 +74,11 @@ namespace MeetingAPI.Migrations
 
             modelBuilder.Entity("MeetingAPI.Models.MeetingsAttenders", b =>
                 {
-                    b.Property<int>("MeetingId");
+                    b.Property<int>("MeetingId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("AttenderId");
+                    b.Property<int>("AttenderId")
+                        .HasColumnType("int");
 
                     b.HasKey("MeetingId", "AttenderId");
 
@@ -88,13 +91,16 @@ namespace MeetingAPI.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("EventColor")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -103,17 +109,19 @@ namespace MeetingAPI.Migrations
 
             modelBuilder.Entity("MeetingAPI.Models.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Login")
-                        .IsRequired();
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -124,7 +132,9 @@ namespace MeetingAPI.Migrations
                 {
                     b.HasOne("MeetingAPI.Models.Room", "Room")
                         .WithMany()
-                        .HasForeignKey("RoomId");
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MeetingAPI.Models.User", "User")
                         .WithMany()

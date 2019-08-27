@@ -17,7 +17,7 @@ namespace MeetingAPI.Data
         }
         public async Task<User> Login(string username, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Login == username);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == username);
             if (user == null)
                 return null;
 
@@ -38,7 +38,7 @@ namespace MeetingAPI.Data
 
         public async Task<bool> UserExists(string username)
         {
-            if (await _context.Users.AnyAsync(x => x.Login == username))
+            if (await _context.Users.AnyAsync(x => x.Id == username))
                 return true;
 
             return false;

@@ -35,8 +35,8 @@ namespace MeetingAPI.Controllers
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, userFromRepository.Login),
-                new Claim(ClaimTypes.Name, userFromRepository.Login),
+                new Claim(ClaimTypes.NameIdentifier, userFromRepository.Id),
+                new Claim(ClaimTypes.Name, userFromRepository.Name),
                 new Claim(ClaimTypes.Email, userFromRepository.Email),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("Settings:Token").Value));

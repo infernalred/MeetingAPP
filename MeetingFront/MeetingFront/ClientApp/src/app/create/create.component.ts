@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Room } from '../_models/room';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Attender } from '../_models/attender';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-create',
@@ -15,30 +16,27 @@ import { Attender } from '../_models/attender';
 export class CreateComponent implements OnInit {
   model: Meeting;
   rooms: Room[]=[];
-  attenders: Attender[]=[];
+  attendersChoose: Attender[]=[];
+  userModel2: User;
   createForm: FormGroup;
-  login: string;
 
-  constructor(private schedulerService: SchedulerService, private alertify: AlertifyService, private router: Router) { }
+  constructor(private schedulerService: SchedulerService, private alertify: AlertifyService, private router: Router) {
+    this.userModel2 = schedulerService.getUser();
+  }
 
   ngOnInit() {
-    this.login = this.schedulerService.username.toString();
-
-    this.createForm = new FormGroup({
+   this.createForm = new FormGroup({
       title: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
       timeStart: new FormControl('', Validators.required),
       timeEnd: new FormControl('', Validators.required),
-      username: new FormControl({username: this.login}),
-      room: new FormControl('', Validators.required),
+      userId: new FormControl(this.userModel2.id),
+      roomId: new FormControl('', Validators.required),
       attenders: new FormControl('', Validators.required)
     }, this.datesValidator);
 
-
-    
-
     this.schedulerService.getAttenders().subscribe(response => {
-      this.attenders = response;
+      this.attendersChoose = response;
     });
 
     this.schedulerService.getRooms().subscribe(response => {
@@ -51,17 +49,17 @@ export class CreateComponent implements OnInit {
   }
 
   createMeeting() {
-    // this.schedulerService.createMeeting(this.model).subscribe(next => {
-    //   console.log(this.model);
-    //   this.alertify.success('Meeting are created');
-    // }, error => {
-    //   console.log(this.model);
-    //   this.alertify.error(error);
-    // }, () => {
-    //   this.router.navigate(['/home']);
-    // });
+    this.schedulerService.createMeeting(this.createForm.value).subscribe(next => {
+      console.log(this.createForm.value);
+      this.alertify.success('Meeting are created');
+    }, error => {
+      console.log(this.createForm.value);
+      this.alertify.error(error);
+    }, () => {
+      this.router.navigate(['/home']);
+    });
 
-    console.log(this.createForm.value);
+    //console.log(this.createForm.value);
   }
 
 }

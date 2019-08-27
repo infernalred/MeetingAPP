@@ -44,13 +44,12 @@ namespace MeetingAPI.Controllers
         }
 
         [HttpPost]
-
         public async Task<IActionResult> AddMeeting(MeetingCreateDto meetingCreateDto)
         {
-            var meetingToCreate = _mapper.Map<Meeting>(meetingCreateDto);
+            Meeting meetingToCreate = _mapper.Map<Meeting>(meetingCreateDto);
             _repo.Add(meetingToCreate);
             if (await _repo.SaveAll())
-                NoContent();
+                return NoContent();
 
             throw new Exception($"Creating meeting failed on save");
         }
