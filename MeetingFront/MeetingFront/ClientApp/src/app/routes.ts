@@ -14,6 +14,7 @@ export const appRoutes: Routes = [
         children: [
             {path: 'create', component: CreateComponent},
             {path: 'details', component: DetailsComponent},
+            {path: 'details/:id', component: DetailsComponent},
             {path: 'admin', component: AdminComponent},
         ]
     }, 

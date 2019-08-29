@@ -21,6 +21,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGet() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
@@ -39,6 +44,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     FullCalendarModule,
     RouterModule.forRoot(appRoutes),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGet,
+        whitelistedDomains: ['localhost:5555'],
+        blacklistedRoutes: ['localhost:5555/api/auth']
+      }
+    }),
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),

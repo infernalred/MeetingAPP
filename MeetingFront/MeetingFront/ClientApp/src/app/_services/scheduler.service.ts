@@ -10,11 +10,6 @@ import { Attender } from '../_models/attender';
 import { User } from '../_models/user';
 import { UserModel } from '../_models/usermodel';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Authorization': 'Bearer ' + localStorage.getItem('token')
-  })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -30,23 +25,23 @@ constructor(private http: HttpClient, public authService: AuthService) {
  }
 
 getAttenders(): Observable<Attender[]>{
-  return this.http.get<Attender[]>(this.baseUrl + 'attender', httpOptions);
+  return this.http.get<Attender[]>(this.baseUrl + 'attender');
 }
 
 getRooms(): Observable<Room[]>{
-  return this.http.get<Room[]>(this.baseUrl + 'values/allrooms', httpOptions);
+  return this.http.get<Room[]>(this.baseUrl + 'values/allrooms');
 }
 
 getMeetings(): Observable<Meeting[]>{
-  return this.http.get<Meeting[]>(this.baseUrl + 'meeting', httpOptions);
+  return this.http.get<Meeting[]>(this.baseUrl + 'meeting');
 }
 
 getMeeting(id): Observable<Meeting>{
-  return this.http.get<Meeting>(this.baseUrl + 'meeting/' + id, httpOptions);
+  return this.http.get<Meeting>(this.baseUrl + 'meeting/' + id);
 }
 
 createMeeting(model: Meeting) {
-  return this.http.post(this.baseUrl + 'meeting', model, httpOptions);
+  return this.http.post(this.baseUrl + 'meeting', model);
 }
 
 getUser() {

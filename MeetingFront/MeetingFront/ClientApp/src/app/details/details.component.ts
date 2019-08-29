@@ -15,11 +15,14 @@ export class DetailsComponent implements OnInit {
   constructor(private schedulerService: SchedulerService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loadMeeting();
   }
 
   loadMeeting() {
     this.schedulerService.getMeeting(+this.route.snapshot.params['id']).subscribe((meeting: Meeting) => {
       this.meeting = meeting;
+    }, error => {
+      this.alertify.error(error);
     });
   }
 
