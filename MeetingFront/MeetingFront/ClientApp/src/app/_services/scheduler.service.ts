@@ -41,6 +41,10 @@ getMeetings(): Observable<Meeting[]>{
   return this.http.get<Meeting[]>(this.baseUrl + 'meeting', httpOptions);
 }
 
+getMeeting(id): Observable<Meeting>{
+  return this.http.get<Meeting>(this.baseUrl + 'meeting/' + id, httpOptions);
+}
+
 createMeeting(model: Meeting) {
   return this.http.post(this.baseUrl + 'meeting', model, httpOptions);
 }

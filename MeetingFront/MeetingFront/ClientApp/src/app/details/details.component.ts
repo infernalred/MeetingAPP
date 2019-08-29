@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Meeting } from '../_models/meeting';
+import { SchedulerService } from '../_services/scheduler.service';
+import { AlertifyService } from '../_services/alertify.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -6,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
+  meeting: Meeting;
 
-  constructor() { }
+  constructor(private schedulerService: SchedulerService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+  }
+
+  loadMeeting() {
+    this.schedulerService.getMeeting(+this.route.snapshot.params['id']).subscribe((meeting: Meeting) => {
+      this.meeting = meeting;
+    });
   }
 
 }

@@ -14,7 +14,6 @@ import { User } from '../_models/user';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-  model: Meeting;
   rooms: Room[]=[];
   attendersChoose: Attender[]=[];
   userModel2: User;
