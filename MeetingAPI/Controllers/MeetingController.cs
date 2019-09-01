@@ -39,7 +39,7 @@ namespace MeetingAPI.Controllers
         public async Task<IActionResult> GetMeeting(int id)
         {
             var meeting = await _repo.GetMeeting(id);
-            var meetingToReturn = _mapper.Map<MeetingCalendarDto>(meeting);
+            var meetingToReturn = _mapper.Map<MeetingDetailsDto>(meeting);
             return Ok(meetingToReturn);
         }
 

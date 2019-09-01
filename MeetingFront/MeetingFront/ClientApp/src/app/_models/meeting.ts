@@ -9,7 +9,9 @@ export interface Meeting {
     timeStart: Date;
     timeEnd: Date;
     roomId: number;
+    room: Room;
     userId: string;
+    user: User;
     username: string;
     resourceId: number;
     attenders: Attender[];

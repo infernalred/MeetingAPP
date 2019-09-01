@@ -27,7 +27,9 @@ namespace MeetingAPI.Data
 
         public async Task<Meeting> GetMeeting(int id)
         {
-            var meeting = await _context.Meetings.Include(x => x.MeetingsAttenders).FirstOrDefaultAsync(m => m.Id == id);
+            var meeting = await _context.Meetings.Include(x => x.Room).Include(x => x.User).Include(x => x.MeetingsAttenders).ThenInclude(m => m.Attender).FirstOrDefaultAsync(m => m.Id == id);
+            //_context.Meetings.Include(m => m.MeetingsAttenders).FirstOrDefaultAsync(m => m.Id == id);
+            //_context.Meetings.Include(x => x.Room).Include(x => x.User).Include(x => x.MeetingsAttenders).ThenInclude(m => m.AttenderId).FirstOrDefaultAsync(m => m.Id == id);
             return meeting;
         }
 

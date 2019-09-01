@@ -1,3 +1,19 @@
-<p>
-  {{meeting.title}}
-</p>
+<div class="container mt-2">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" value={{meeting.title}}>
+        <label for="title">Start meeting</label>
+        <input type="datetime-local" class="form-control" value={{meeting.timeStart}}>
+        <label for="title">End meeting</label>
+        <input type="datetime-local" class="form-control" value={{meeting.timeEnd}}>
+        <label for="title">Creator</label>
+        <input type="text" class="form-control" value={{meeting.user.name}}>
+        <label for="title">Attenders</label>
+        <input type="text" class="form-control" *ngFor="let attender of meeting.attenders" value={{attender.name}}>
+
+      </div>
+    </div>
+  </div>
+</div>

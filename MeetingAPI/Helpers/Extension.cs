@@ -25,5 +25,16 @@ namespace MeetingAPI.Helpers
             }
             return meetingsAttenders;
         }
+
+        public static List<Attender> Attenders(this List<MeetingsAttenders> meetingsAttenders)
+        {
+            List<Attender> attenders = new List<Attender>();
+            //attenders.AddRange(meetingsAttenders.Select(s => s.Attender));
+            foreach (var attender in meetingsAttenders)
+            {
+                attenders.Add(attender.Attender);
+            }
+            return attenders;
+        }
     }
 }

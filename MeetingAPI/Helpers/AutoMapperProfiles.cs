@@ -30,8 +30,24 @@ namespace MeetingAPI.Helpers
                 {
                     o.MapFrom(s => s.Attenders.MeetingsAttenders());
                 });
+            CreateMap<Meeting, MeetingDetailsDto>()
+                .ForMember(d => d.Attenders, o =>
+                {
+                    o.MapFrom(s => s.MeetingsAttenders.Select(x => x.Attender));
+                })
+                .ForMember(d => d.TimeStart, o =>
+                {
+                    o.MapFrom(s => s.Start);
+                })
+                .ForMember(d => d.TimeEnd, o =>
+                {
+                    o.MapFrom(s => s.End);
+                });
+            CreateMap<Attender, AttenderDetailsDto>();
+            CreateMap<User, UserDto>();
 
-           
+
+
 
         }
     }
