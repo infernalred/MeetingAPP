@@ -2,17 +2,22 @@
   <div class="row justify-content-center">
     <div class="col-6">
       <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" value={{meeting.title}}>
-        <label for="title">Start meeting</label>
-        <input type="datetime-local" class="form-control" value={{meeting.timeStart}}>
-        <label for="title">End meeting</label>
-        <input type="datetime-local" class="form-control" value={{meeting.timeEnd}}>
-        <label for="title">Creator</label>
-        <input type="text" class="form-control" value={{meeting.user.name}}>
-        <label for="title">Attenders</label>
-        <input type="text" class="form-control" *ngFor="let attender of meeting.attenders" value={{attender.name}}>
-
+        <label for="meeting.title">Title</label>
+        <input type="text" class="form-control" value={{meeting?.title}} readonly>
+        <label for="meeting.timeStart">Start meeting</label>
+        <input type="datetime-local" class="form-control" value="{{meeting?.timeStart}}" readonly>
+        <label for="meeting.timeEnd">End meeting</label>
+        <input type="datetime-local" class="form-control" value={{meeting?.timeEnd}} readonly>
+        <label for="meeting.user.name">Creator</label>
+        <input type="text" class="form-control" value={{meeting?.user.name}} readonly>
+        <div class="form-group">
+            <label for="meeting.attender">Attenders</label>
+            <select multiple class="form-control" id="meeting.attender"  readonly>
+            <option *ngFor="let attender of meeting?.attenders">{{attender.name}}</option>
+            </select>
+          </div>
+        
+       
       </div>
     </div>
   </div>
