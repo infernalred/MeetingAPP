@@ -22,6 +22,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
+import { EditComponent } from './edit/edit.component';
 
 export function tokenGet() {
   return localStorage.getItem('token');
@@ -35,7 +36,8 @@ export function tokenGet() {
       CalendarComponent,
       CreateComponent,
       DetailsComponent,
-      AdminComponent
+      AdminComponent,
+      EditComponent
    ],
    imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

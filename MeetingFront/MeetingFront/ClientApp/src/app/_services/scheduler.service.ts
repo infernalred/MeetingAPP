@@ -44,6 +44,10 @@ createMeeting(model: Meeting) {
   return this.http.post(this.baseUrl + 'meeting', model);
 }
 
+updateMeeting(model: Meeting) {
+  return this.http.post(this.baseUrl + 'meeting', model);
+}
+
 getUser() {
   let userModel = new UserModel(this.authService.decodedToken.nameid, this.authService.decodedToken.unique_name, this.authService.decodedToken.email);
   return userModel;
