@@ -7,7 +7,6 @@ import { Room } from '../_models/room';
 import { Attender } from '../_models/attender';
 import { User } from '../_models/user';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { MeetingModel } from '../_models/meetingModel';
 
 @Component({
   selector: 'app-edit',
@@ -20,6 +19,8 @@ export class EditComponent implements OnInit {
   attendersChoose: Attender[]=[];
   userModel2: User;
   createForm: FormGroup;
+  attenderSelected: Attender[]=[];
+  
 
   constructor(private schedulerService: SchedulerService, private alertify: AlertifyService, private route: ActivatedRoute, private router: Router) { 
     this.userModel2 = schedulerService.getUser();
@@ -31,6 +32,7 @@ export class EditComponent implements OnInit {
     this.loadMeeting();
 
     this.createForm = new FormGroup({
+      id: new FormControl(),
       title: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
       timeStart: new FormControl('', Validators.required),
@@ -39,10 +41,6 @@ export class EditComponent implements OnInit {
       roomId: new FormControl('', Validators.required),
       attenders: new FormControl('', Validators.required)
     }, this.datesValidator);
-
-    // this.createForm.patchValue({
-    //   title: this.meeting.title,
-    // });
 
 
 
@@ -63,17 +61,25 @@ export class EditComponent implements OnInit {
   loadMeeting() {
     this.schedulerService.getMeeting(+this.route.snapshot.params['id']).subscribe((meeting: Meeting) => {
       this.meeting = meeting;
+      this.attenderSelected = meeting.attenders;
+      console.log(this.attenderSelected);
+      
       this.createForm.patchValue({
+        id: this.meeting.id,
         title: this.meeting.title,
-        date: this.meeting.timeStart.toLocaleDateString,
+        date: new Date(meeting.timeStart).toLocaleDateString(),
         timeStart: this.meeting.timeStart,
         timeEnd: this.meeting.timeEnd,
         roomId: this.meeting.room.id,
-        attenders: this.meeting.attenders.values,
+        attenders: this.meeting.attenders,
       });
     }, error => {
       this.alertify.error(error);
     });
+  }
+
+  selectAttenders() {
+    
   }
 
   updateMeeting() {
@@ -88,6 +94,10 @@ export class EditComponent implements OnInit {
     // });
 
     console.log(this.createForm.value);
+  }
+
+  compareFun(item1, item2): boolean {
+    return item1 && item2 ? item1.id == item2.id : item1 === item2;
   }
 
 }

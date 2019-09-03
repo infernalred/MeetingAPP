@@ -18,7 +18,6 @@
               [ngClass]="{'is-invalid': createForm.get('date').errors && createForm.get('date').touched}"
                      class="form-control"
                      #dp="bsDatepicker"
-                     [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
                      formControlName="date"
                      bsDatepicker>
                      <div class="invalid-feedback">Please fill the date</div>
@@ -48,13 +47,14 @@
 
           <div class="form-group">
             <label for="attenders">Attenders</label>
-            <select 
+            <select [compareWith]="compareFun"
             [ngClass]="{'is-invalid': createForm.get('attenders').errors && createForm.get('attenders').touched}"
-            multiple class="form-control" [selectedIndex]="createForm.value.attenders" formControlName="attenders">
-              <option *ngFor="let attender of attendersChoose" [ngValue]="attender">{{attender.name}}</option>
+            multiple class="form-control" formControlName="attenders">
+              <option *ngFor="let attender of attendersChoose" [ngValue]="attender" [selected]="compareFun(attender, attenderSelected)">{{attender.name}}</option>
             </select>
             <div class="invalid-feedback">Please choose attenders for meeting</div>
           </div>
+          
 
             <button [disabled]="!createForm.valid" type="submit" class="btn btn-danger">Update</button>
           </form>
