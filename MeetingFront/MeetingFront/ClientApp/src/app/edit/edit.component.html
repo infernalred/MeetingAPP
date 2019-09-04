@@ -27,11 +27,11 @@
           <div class="row">
             <div class="col-xs-6 col-6 col-md-3 mr-5">
                 <label for="timeStart">Start time</label>
-                <timepicker formControlName="timeStart" [showMeridian]="false"></timepicker>
+                <timepicker formControlName="timeStart" [showMeridian]="false" [minuteStep]="30"></timepicker>
             </div>
             <div class="col-xs-6 col-6 col-md-3">
                   <label for="timeEnd">End time</label>
-                  <timepicker formControlName="timeEnd"  [showMeridian]="false"></timepicker>
+                  <timepicker formControlName="timeEnd"  [showMeridian]="false" [minuteStep]="30"></timepicker>
                 </div>
           </div>
 

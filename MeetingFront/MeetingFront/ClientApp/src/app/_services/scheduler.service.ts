@@ -44,8 +44,8 @@ createMeeting(model: Meeting) {
   return this.http.post(this.baseUrl + 'meeting', model);
 }
 
-updateMeeting(model: Meeting) {
-  return this.http.post(this.baseUrl + 'meeting', model);
+updateMeeting(id: number, model: Meeting) {
+  return this.http.put(this.baseUrl + 'meeting/' + id, model);
 }
 
 getUser() {

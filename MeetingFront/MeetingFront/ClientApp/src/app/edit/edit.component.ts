@@ -62,12 +62,11 @@ export class EditComponent implements OnInit {
     this.schedulerService.getMeeting(+this.route.snapshot.params['id']).subscribe((meeting: Meeting) => {
       this.meeting = meeting;
       this.attenderSelected = meeting.attenders;
-      console.log(this.attenderSelected);
       
       this.createForm.patchValue({
         id: this.meeting.id,
         title: this.meeting.title,
-        date: new Date(meeting.timeStart).toLocaleDateString(),
+        date: new Date((meeting.timeStart)),
         timeStart: this.meeting.timeStart,
         timeEnd: this.meeting.timeEnd,
         roomId: this.meeting.room.id,
@@ -83,17 +82,15 @@ export class EditComponent implements OnInit {
   }
 
   updateMeeting() {
-    // this.schedulerService.updateMeeting(this.createForm.value).subscribe(next => {
-    //   console.log(this.createForm.value);
-    //   this.alertify.success('Meeting are created');
-    // }, error => {
-    //   console.log(this.createForm.value);
-    //   this.alertify.error(error);
-    // }, () => {
-    //   this.router.navigate(['/home']);
-    // });
-
-    console.log(this.createForm.value);
+    this.schedulerService.updateMeeting(this.meeting.id, this.createForm.value).subscribe(next => {
+      console.log(this.meeting.id,  this.createForm.value);
+      this.alertify.success('Meeting are updated');
+    }, error => {
+      console.log(this.meeting.id,  this.createForm.value);
+      this.alertify.error(error);
+    }, () => {
+      this.router.navigate(['/home']);
+    });
   }
 
   compareFun(item1, item2): boolean {

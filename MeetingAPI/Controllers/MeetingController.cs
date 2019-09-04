@@ -53,5 +53,17 @@ namespace MeetingAPI.Controllers
 
             throw new Exception($"Creating meeting failed on save");
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateMeeting(int id, MeetingCreateDto meetingCreateDto)
+        {
+            var meetingFromRepo = await _repo.GetMeeting(id);
+            _mapper.Map(meetingCreateDto, meetingFromRepo);
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating meeting {meetingCreateDto.Title} failed on server");
+        }
+
     }
 }
