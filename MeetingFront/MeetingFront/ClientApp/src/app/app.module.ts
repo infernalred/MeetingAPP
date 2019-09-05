@@ -23,6 +23,9 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { EditComponent } from './edit/edit.component';
+import { RoomsComponent } from './admins/rooms/rooms.component';
+import { AttendersComponent } from './admins/attenders/attenders.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 export function tokenGet() {
   return localStorage.getItem('token');
@@ -37,7 +40,9 @@ export function tokenGet() {
       CreateComponent,
       DetailsComponent,
       AdminComponent,
-      EditComponent
+      EditComponent,
+      RoomsComponent,
+      AttendersComponent
    ],
    imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -56,7 +61,8 @@ export function tokenGet() {
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
+    NgSelectModule
   ],
   providers: [
     AuthService,

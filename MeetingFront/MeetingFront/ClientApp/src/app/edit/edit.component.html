@@ -46,14 +46,20 @@
           </div>
 
           <div class="form-group">
-            <label for="attenders">Attenders</label>
-            <select [compareWith]="compareFun"
-            [ngClass]="{'is-invalid': createForm.get('attenders').errors && createForm.get('attenders').touched}"
-            multiple class="form-control" formControlName="attenders">
-              <option *ngFor="let attender of attendersChoose" [ngValue]="attender" [selected]="compareFun(attender, attenderSelected)">{{attender.name}}</option>
-            </select>
-            <div class="invalid-feedback">Please choose attenders for meeting</div>
-          </div>
+              <label for="attenders">Attenders</label>
+              <ng-select  [compareWith]="compareFun"
+                          [items]="attendersChoose"
+                          [required]="true"
+                          bindLabel="name"
+                          dropdownPosition="auto"
+                          labelForId="attender"
+                          [multiple]="true"
+                          placeholder="Select attender"
+                          clearAllText="Clear"
+                          formControlName="attenders">
+              </ng-select>
+              <div [hidden]="createForm.get('attenders').valid &&createForm.get('attenders').touched" class="alert alert-danger">Please choose attenders for meeting</div>
+            </div>
           
 
             <button [disabled]="!createForm.valid" type="submit" class="btn btn-danger">Update</button>

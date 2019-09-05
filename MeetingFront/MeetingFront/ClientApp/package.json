@@ -27,6 +27,7 @@
     "@fullcalendar/core": "^4.2.0",
     "@fullcalendar/daygrid": "^4.2.0",
     "@fullcalendar/resource-timegrid": "^4.2.0",
+    "@ng-select/ng-select": "^2.20.5",
     "@nguniversal/module-map-ngfactory-loader": "7.1.0",
     "alertifyjs": "^1.11.4",
     "aspnet-prerendering": "^3.0.1",
