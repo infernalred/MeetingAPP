@@ -28,6 +28,10 @@ getAttenders(): Observable<Attender[]>{
   return this.http.get<Attender[]>(this.baseUrl + 'attender');
 }
 
+getAttender(id): Observable<Attender>{
+  return this.http.get<Attender>(this.baseUrl + 'attender/' + id);
+}
+
 getRooms(): Observable<Room[]>{
   return this.http.get<Room[]>(this.baseUrl + 'values/allrooms');
 }
@@ -52,5 +56,19 @@ getUser() {
   let userModel = new UserModel(this.authService.decodedToken.nameid, this.authService.decodedToken.unique_name, this.authService.decodedToken.email);
   return userModel;
 }
+
+getAllRooms(): Observable<Room[]> {
+  return this.http.get<Room[]>(this.baseUrl + 'room');
+}
+
+getRoom(id): Observable<Room>{
+  return this.http.get<Room>(this.baseUrl + 'room/' + id);
+}
+
+updateRoom(id: number, model: Room) {
+  return this.http.put(this.baseUrl + 'room/' + id, model);
+}
+
+
 
 }

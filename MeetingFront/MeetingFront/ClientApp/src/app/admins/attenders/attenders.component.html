@@ -1,3 +1,24 @@
-<p>
-  attenders works!
-</p>
+<div class="container mt-2"> 
+    <div class="row justify-content-center">
+      <h1>Table of attenders</h1>
+
+      <p *ngIf="!attenders"><em>Loading....</em>></p>
+
+      <table class="table" *ngIf="attenders">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let attender of attenders">
+            <td>{{attender.id}}</td>
+            <td>{{attender.name}}</td>
+            <td>{{attender.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+</div>

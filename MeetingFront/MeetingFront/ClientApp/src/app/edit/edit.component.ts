@@ -77,9 +77,6 @@ export class EditComponent implements OnInit {
     });
   }
 
-  selectAttenders() {
-    
-  }
 
   updateMeeting() {
     this.schedulerService.updateMeeting(this.meeting.id, this.createForm.value).subscribe(next => {
