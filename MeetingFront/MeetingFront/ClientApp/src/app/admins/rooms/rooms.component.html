@@ -1,3 +1,24 @@
-<p>
-  rooms works!
-</p>
+<div class="container mt-2"> 
+    <div class="row justify-content-center">
+      <h1>Table of rooms</h1>
+
+      <p *ngIf="!rooms"><em>Loading....</em>></p>
+
+      <table class="table" *ngIf="rooms">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Color</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let room of rooms">
+            <td>{{room.id}}</td>
+            <td>{{room.title}}</td>
+            <td>{{room.eventColor}}</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+</div>
