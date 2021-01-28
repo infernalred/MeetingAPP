@@ -50,7 +50,7 @@ export function tokenGet() {
     FormsModule,
     ReactiveFormsModule,
     FullCalendarModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGet,
